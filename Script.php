@@ -75,7 +75,6 @@ if (!empty($_POST["frm_signup_2"])) {
     $_SESSION['user_fullname'] = $fullname;
     $_SESSION['user_type'] = "Student";
     $_SESSION['user_email'] = $email;
-    $_SESSION['user_student_id'] = $student_id;
 
     // check confirmed password
     if (strcasecmp($password, $confirmpassword) != 0) {
@@ -302,7 +301,7 @@ function is_valid_file_format($file)
         'cvc', 'c', 'class', 'cpp', 'h', 'java', 'sh', 'swift', 'zip', 'rar', 'ods', 'xlr', 'bak', 'ico', 'swf'
     );
 
-    $filename = $_FILES[$file]['name'];
+    utf8_encode($filename = $_FILES[$file]['name']);
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
     $result = in_array($ext, $allowed);
     return $result;
@@ -454,8 +453,10 @@ function checksize($file)
 }
 
 // ############################### Submit Assignment ##################################
+
 if (!empty($_POST["frm_submitlab"])) {
 
+    /* Posting values to database */
     $lab_id = mysqli_real_escape_string($con, $_POST["lab_id"]);
     $student_id = $_POST["student_id"];
     $group_id = $_POST["group_id"];
@@ -552,19 +553,19 @@ if (!empty($_POST["frm_submitlab"])) {
     $targetfile4 = "";
 
     if (strlen($_FILES['attachment1']['name']) > 2) { // why greater than 2???
-        $targetfile = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . rawurlencode($_FILES['attachment1']['name']);
+        $targetfile = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . $_FILES['attachment1']['name'];
     }
 
     if (strlen($_FILES['attachment2']['name']) > 2) {
-        $targetfile2 = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . rawurlencode($_FILES['attachment2']['name']);
+        $targetfile2 = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . $_FILES['attachment2']['name'];
     }
 
     if (strlen($_FILES['attachment3']['name']) > 2) {
-        $targetfile3 = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . rawurlencode($_FILES['attachment3']['name']);
+        $targetfile3 = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . $_FILES['attachment3']['name'];
     }
 
     if (strlen($_FILES['attachment4']['name']) > 2) {
-        $targetfile4 = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . rawurlencode($_FILES['attachment4']['name']);
+        $targetfile4 = "/" . $student_id . "/" . $url . "/" . $lab_name . "/" . $_FILES['attachment4']['name'];
     }
 
     // When $group_id is not properly initialized, use integer 0 as its value.
