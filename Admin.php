@@ -51,11 +51,11 @@ if ($_SESSION['user_type'] != "Lecturer") {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#menu2">Batch Create New Student Accounts</a>
+          <a class="nav-link" data-toggle="tab" href="#menu2" id="batch_tab">Batch Create New Student Accounts</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#menu1">Existing Accounts</a>
+          <a class="nav-link" data-toggle="tab" href="#menu1" id="ex_acc">Existing Accounts</a>
         </li>
 
       </ul>
@@ -66,7 +66,7 @@ if ($_SESSION['user_type'] != "Lecturer") {
         <div id="home" class="container tab-pane active"><br>
 
           <b>Create Lecturer/TA Accounts </b>
-          <form method="post" action="Script.php">
+          <form method="post" action="Script.php" id="create_acc_frm">
             <input type="hidden" name="frm_createlecturrer" value="true" required="" />
             Full_Name
             <input type="text" name="fullname" placeholder="Full Name" class="form-control" required="">
@@ -76,9 +76,9 @@ if ($_SESSION['user_type'] != "Lecturer") {
             Passport_Number / ID (Used as Intial Password)
             <input type="text" class="form-control" name="passport" placeholder="Passport No./ID" required="">
             <br> User Type :
-            <input type="radio" name="type" value="Lecturer" required=""> Lecturer
-            <input type="radio" name="type" value="TA" required=""> T/A
-            <input type="submit" class="btn btn-primary" value="Create"><br>
+            <input type="radio" name="type" value="Lecturer" required="" id="rad_lec"> Lecturer
+            <input type="radio" name="type" value="TA" required="" id="rad_ta"> T/A
+            <input type="submit" class="btn btn-primary" value="Create" id="create_btn"><br>
             <?php
 
             error_reporting(E_ALL);
@@ -121,10 +121,10 @@ if ($_SESSION['user_type'] != "Lecturer") {
               $btn = "<button class='btn-primary' onclick=\"updatePass(" . $row['User_ID'] . ",'$pass')\">Reset</button>";
               if ($row['Status'] == "Active") {
                 $newstatus = "Blocked";
-                $btnBlock = "<button class='btn-danger' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\">Block</button>";
+                $btnBlock = "<button class='btn-danger' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\" id=\"block_acc_1\">Block</button>";
               } else {
                 $newstatus = "Active";
-                $btnBlock = "<button class='btn-success' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\">Activate</button>";
+                $btnBlock = "<button class='btn-success' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\" id=\"activate_acc_1\">Activate</button>";
               }
 
               echo "<tr><td>" . $row['User_ID'] . "</td><td>" . $row['Full_Name'] . "</td><td>" . $row['Email'] . "</td> <td>" . $row['Passport_Number'] . "</td><td>$btn</td><td>$btnBlock</td></tr>";
@@ -138,11 +138,11 @@ if ($_SESSION['user_type'] != "Lecturer") {
 
         <div id="menu2" class="container tab-pane fade" style="margin-top:10px">
           <b>Separate two student numbers with a space.</b><br>
-          <form action="batch_insert.php" method="post">
+          <form action="batch_insert.php" method="post" id="batch_frm">
             <p>
               <textarea cols="80" rows="16" name="users" required=""></textarea>
             </p>
-            <input type="submit" class="btn btn-primary" value="Register Students"><br>
+            <input type="submit" class="btn btn-primary" value="Register Students" id="reg_btn"><br>
           </form>
         </div>
 

@@ -17,24 +17,24 @@ include 'Header.php';
 
             <div class="panel-body">
 
-                <form method="post" action="Script.php">
+                <form method="post" action="Script.php" id="signup_frm">
                     <input type="hidden" name="frm_signup_2" value="true" />
                     Full Name
-                    <input type="text" name="fullname" placeholder="Your full name" class="form-control" value="<?php echo $_SESSION['user_fullname']; ?>" required="required" />
+                    <input type="text" name="fullname" placeholder="Your full name" class="form-control" value="<?php echo $_SESSION['user_fullname']; ?>" required="required" id="funame"/>
 
                     Student ID
-                    <input type="text" name="user_student_id" placeholder="Entre your student ID" class="form-control" value="<?php echo $_SESSION['user_student_id']; ?>" required="required">
+                    <input type="text" name="user_student_id" placeholder="Entre your student ID" class="form-control" value="<?php echo $_SESSION['user_student_id']; ?>" required="required" id="std_id">
 
                     Email
-                    <input type="text" name="email" placeholder="Email" class="form-control" value="<?php echo $_SESSION['user_email']; ?>" required="required" />
+                    <input type="text" name="email" placeholder="Email" class="form-control" value="<?php echo $_SESSION['user_email']; ?>" required="required" id="email" />
 
                     Password (<i>must include uppercase and lowercase letters, digits and special characters</i>)
-                    <input type="password" class="form-control" name="password" placeholder="Enter password" required="required" />
+                    <input type="password" class="form-control" name="password" placeholder="Enter password" required="required" id="pass1" />
 
                     Confirm Password
-                    <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm password" required="required" />
+                    <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm password" required="required" id="pass2" />
                     <br>
-                    <input type="submit" class="btn-primary" value="Sign up">
+                    <input type="submit" class="btn-primary" value="Sign up" id="sign_btn">
                     <?php
                     error_reporting(E_ALL);
                     if (isset($_SESSION['info_signup2'])) {
