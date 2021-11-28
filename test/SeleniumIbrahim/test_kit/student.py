@@ -55,10 +55,10 @@ class Student(Actor):
 
 			#Wait until the course is found, and join.
 			wait2 = WebDriverWait(driver, 10)
-			course_card = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, str("Join Course"))))
-			course_card.click()
+			join_btn = wait2.until(EC.element_to_be_clickable((By.ID, "join_btn")))
+			join_btn.click()
 
-			#If the joined course successfully, proceed.
+			#If joined course successfully, proceed.
 			wait3 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/span")))
 			return 0
 

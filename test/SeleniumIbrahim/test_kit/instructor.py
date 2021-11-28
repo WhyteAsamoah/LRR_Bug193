@@ -60,26 +60,25 @@ class Instructor(Actor):
 
 			#wait until the lab submission form shows up
 			wait2 = WebDriverWait(driver, 10)
-			new_lab_assignment_form = wait2.until(EC.presence_of_element_located((By.XPATH, "//form[@id='nlaf']")))
+			new_lab_assignment_form = wait2.until(EC.presence_of_element_located((By.ID, "newlab_frm")))
 			
 			#Fill the required form fields and submit.
-			lab_date = new_lab_assignment_form.find_element(By.XPATH, "//input[@id='date'][@name='deadlinedate']")
-			timeStr = self.utility.getTodayDate()
-			lab_date.send_keys(timeStr)
-			lab_title = new_lab_assignment_form.find_element(By.XPATH, "//form[@id='nlaf']/input[@id='ltitle']")
+			lab_date = new_lab_assignment_form.find_element(By.ID, "date")
+			lab_date.send_keys(dateStr)
+			lab_title = new_lab_assignment_form.find_element(By.ID, "lab_title")
 			lab_title.send_keys("TESTASSIGNMENT"+str(dateStr))
-			lab_instructions = new_lab_assignment_form.find_element(By.XPATH, "//form[@id='nlaf']/textarea[@id='linstruct']")
+			lab_instructions = new_lab_assignment_form.find_element(By.ID, "lab_inst")
 			lab_instructions.send_keys("TESTINSTRUCTIONS"+str(dateStr))
-			lab_marks = new_lab_assignment_form.find_element(By.XPATH, "//form[@id='nlaf']/input[@id='lmark']")
+			lab_marks = new_lab_assignment_form.find_element(By.ID, "lab_mark")
 			lab_marks.send_keys("4")
 
 			#if group == 0 select individual submission, if group == 1 select group submission
 			if group == 0:		
-				submission_type = new_lab_assignment_form.find_element(By.XPATH, "//form[@id='nlaf']/input[@id='lindi']")
+				submission_type = new_lab_assignment_form.find_element(By.ID, "lab_ind")
 			elif group == 1:
-				submission_type = new_lab_assignment_form.find_element(By.XPATH, "//form[@id='nlaf']/input[@id='lgrp']")
+				submission_type = new_lab_assignment_form.find_element(By.ID, "lab_grp")
 			submission_type.click()
-			submit = new_lab_assignment_form.find_element(By.XPATH, "//form[@id='nlaf']/input[@id='lbtn']")
+			submit = new_lab_assignment_form.find_element(By.ID, "submit_btn")
 			submit.click()
 			return 0
 		except:
