@@ -144,7 +144,7 @@ class Admin(Actor):
 
 			#Navigate to "Exisitin Accounts" table
 			wait2 = WebDriverWait(driver, 10)
-			exist_acc_tab = wait2.until(EC.presence_of_element_located((By.ID, "ex_acc")))
+			exist_acc_tab = wait2.until(EC.presence_of_element_located((By.ID, "existing_accounts_tab")))
 			exist_acc_tab.click()		
 			
 			#Alternate between block and activate

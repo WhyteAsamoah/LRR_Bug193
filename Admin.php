@@ -55,7 +55,7 @@ if ($_SESSION['user_type'] != "Lecturer") {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#menu1" id="ex_acc">Existing Accounts</a>
+          <a class="nav-link" data-toggle="tab" href="#menu1" id="existing_accounts_tab">Existing Accounts</a>
         </li>
 
       </ul>
