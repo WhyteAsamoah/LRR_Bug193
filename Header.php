@@ -23,7 +23,7 @@ if (mysqli_connect_errno()) {
   <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><!-- Font-awesome CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"><!-- Bootstrap CSS -->
 
-  <link href="./css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="./css/Styles.css" rel="stylesheet" type="text/css" />
 
   <script src="./css/jquery.min.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -42,6 +42,8 @@ if (mysqli_connect_errno()) {
         user-select: none;
       }
 
+      /*Rule to include a block of CSS properties only if a certain condition is true.*/
+      /*https://www.w3schools.com/css/css_rwd_mediaqueries.asp*/
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;

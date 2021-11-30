@@ -30,20 +30,20 @@ if (isset($_SESSION["user_fullname"])) {
                         <h4 class="list-group-item active" style="font-weight:normal;font-family: Poppins-Regular;"> Sign in </h4>
                     </div> 
                  <div class="card-body">
-                   <form method="post" action="Script.php" name="frm_login">
+                   <form  method="post" action="Script.php" name="frm_login">
                     <input type="hidden" name="frm_login" value="true"/>
-                    Student ID / Instructor Email
+                    <p>Student ID / Instructor Email</p>
                     <input type="text" name="user" placeholder="Email / Student Number" class="form-control" required="required" />
                     <br>
-                    Password
-                    <input type="password" class="form-control"  name="password" placeholder="password" required="required" />
+                    <p>Password</p>
+                    <input type="password" class="form-control"  name="password" placeholder="Password" required="required" />
                     <div class="text-center">
-                        <br><input type="submit" class="btn btn-primary my-2" value="Login">
+                        <br><input type="submit" class="btn btn-primary my-2 btn-lg btn-block" value="Login">
                     </div>
                     <br> <a href="recover_password.php">Reset my password</a>
                     <div class="text-center">
-                        <br><span class="txt1">Don't have an account?</span>
-                        <a class="txt2" href="signup.php" >Sign Up</a> 
+                        <br><span >Don't have an account?</span>
+                        <a href="signup.php" >Sign Up</a> 
                     </div> 
 
             <?php 

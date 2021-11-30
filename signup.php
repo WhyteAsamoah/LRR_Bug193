@@ -20,21 +20,22 @@ include 'Header.php';
 
                 <form method="post" action="Script.php">
                     <input type="hidden" name="frm_signup_2" value="true" />
-                    Full Name
+                    <p>Full Name</p>
                     <input type="text" name="fullname" placeholder="Your full name" class="form-control" value="<?php echo $_SESSION['user_fullname']; ?>" required="required" />
 
-                    Student ID
+                    <p>Student ID</p>
                     <input type="text" name="user_student_id" placeholder="Entre your student ID" class="form-control" value="<?php echo $_SESSION['user_student_id']; ?>" required="required">
 
-                    Email
+                    <p>Email</p>
                     <input type="text" name="email" placeholder="Email" class="form-control" value="<?php echo $_SESSION['user_email']; ?>" required="required" />
 
-                    Password (<i>must include uppercase and lowercase letters, digits and special characters</i>)
-                    <input type="password" class="form-control" name="password" placeholder="Enter password" required="required" />
+                    <p>Password (<i>must include uppercase and lowercase letters, digits and special characters</i>)</p>
+                    <input id="password" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{4,}$" title="Password must have at least characters that include lowercase letters, uppercase letters, numbers and sepcial characters (e.g., !?.,*^)." class="form-control" name="password" placeholder="Enter password" required="required"  onchange="if(this.checkValidity()) form.password_two.pattern = this.value;" />
 
-                    Confirm Password
-                    <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm password" required="required" />
+                    <p>Confirm Password</p>
+                    <input id="password_two" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{4,}$" title="Password must have at least characters that include lowercase letters, uppercase letters, numbers and sepcial characters" class="form-control" name="confirmpassword" placeholder="Confirm password" required="required" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" />
                     <br>
+
                     <input type="submit" class="btn btn-primary" value="Sign up">
                     <?php
                     error_reporting(E_ALL);
