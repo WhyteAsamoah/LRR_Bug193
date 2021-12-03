@@ -33,18 +33,18 @@ if (isset($_SESSION["user_fullname"])) {
     <form method="post" action="Script.php" name="frm_login">
     <input type="hidden" name="frm_login" value="true"/>
     Student ID / Instructor Email
-    <input type="text" name="user" placeholder="Email / Student Number" class="form-control" required="required" id="uname" />
+    <input type="text" name="user" placeholder="Email / Student Number" class="form-control" required="required" id="user_name" />
     <br>
     Password
-    <input type="password" class="form-control"  name="password" placeholder="password" required="required" id="upass" />
+    <input type="password" class="form-control"  name="password" placeholder="password" required="required" id="user_password" />
     <div class="text-center">
-    <br><input type="submit" class="btn-primary" value="Login" id="log_btn">
+    <br><input type="submit" class="btn-primary" value="Login" id="login_btn">
     </div>
     <br> <a href="recover_password.php" style="font-weight:normal;color:#2471A3; font-family: Poppins-Regular;
     font-size: 17px;">Reset my password</a>
     <div class="text-center">
     <br><span class="txt1">Don't have an account?</span>
-         <a class="txt2" href="signup.php" style="font-weight:normal" id="signup_btn">Sign Up</a>
+         <a class="txt2" href="signup.php" style="font-weight:normal" id="signup_link">Sign Up</a>
         </a>
     </div>
 

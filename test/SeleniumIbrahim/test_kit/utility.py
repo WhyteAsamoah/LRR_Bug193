@@ -70,11 +70,11 @@ class MyUtility:
 		try:
 			driver = self.getSession()
 			WebDriverWait(driver, 10)
-			username = driver.find_element(By.ID, "uname")
+			username = driver.find_element(By.ID, "user_name")
 			username.send_keys(obj.getStudentID())
-			password = driver.find_element(By.ID, "upass")
+			password = driver.find_element(By.ID, "user_password")
 			password.send_keys(obj.getPassword())
-			login = driver.find_element(By.ID, "log_btn")
+			login = driver.find_element(By.ID, "login_btn")
 			login.click()
 			return driver
 		except:
@@ -106,17 +106,17 @@ class MyUtility:
 			wait = WebDriverWait(driver, 10, ignored_exceptions='StaleElementReferenceException')
 
 			#Click the sign up button, and fill the sign up form
-			signup_btn = wait.until(EC.presence_of_element_located((By.ID, "signup_btn")))
+			signup_btn = wait.until(EC.presence_of_element_located((By.ID, "signup_link")))
 			signup_btn.click()
 			
 			#Find and fill full student name
 			wait2 = WebDriverWait(driver, 10)
-			signup_form = wait2.until(EC.presence_of_element_located((By.ID, "signup_frm")))
-			name_field = signup_form.find_element(By.ID, "funame")
+			signup_form = wait2.until(EC.presence_of_element_located((By.ID, "signup_form")))
+			name_field = signup_form.find_element(By.ID, "full_name")
 			name_field.send_keys(name)
 
 			#Find and fill student ID
-			student_id = signup_form.find_element(By.ID, "std_id")
+			student_id = signup_form.find_element(By.ID, "student_id")
 			std_id = self.fetch_new_student_id()
 			student_id.send_keys(std_id)
 			
@@ -125,15 +125,15 @@ class MyUtility:
 			email_field.send_keys(email)
 			
 			#Find and fill password
-			password_field = signup_form.find_element(By.ID, "pass1")
+			password_field = signup_form.find_element(By.ID, "password1")
 			password_field.send_keys(password)
 			
 			#Find and fill password confirmation
-			re_password_field = signup_form.find_element(By.ID, "pass2")
+			re_password_field = signup_form.find_element(By.ID, "password2")
 			re_password_field.send_keys(password)
 			
 			#Sign up new student
-			submit = signup_form.find_element(By.ID, "sign_btn")
+			submit = signup_form.find_element(By.ID, "signup_btn")
 			submit.click()
 			return 0
 

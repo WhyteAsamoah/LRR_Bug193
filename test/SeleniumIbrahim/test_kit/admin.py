@@ -32,12 +32,12 @@ class Admin(Actor):
 
 			#Locate "Admin" tab.
 			wait = WebDriverWait(driver, 10)
-			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_btn")))
+			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_tab")))
 			admin.click()
 
 			#Locate "Create Lecturer/TA account" form
 			wait2 = WebDriverWait(driver, 10)
-			new_account_form = wait2.until(EC.presence_of_element_located((By.ID, "create_acc_frm")))
+			new_account_form = wait2.until(EC.presence_of_element_located((By.ID, "create_account_form")))
 
 			#Fill in the form fields
 			name_field = new_account_form.find_element(By.XPATH, "//input[@name='fullname']")
@@ -53,9 +53,9 @@ class Admin(Actor):
 
 			#If "Lecturer" is specified in type parameter, select Lecturer account type, else use default
 			if type == "Lecturer":
-				type_radio = new_account_form.find_element(By.ID, "rad_lec")
+				type_radio = new_account_form.find_element(By.ID, "role_lecturer")
 			else:
-				type_radio = new_account_form.find_element(By.ID, "rad_ta")
+				type_radio = new_account_form.find_element(By.ID, "role_TA")
 
 			type_radio.click()
 
@@ -92,7 +92,7 @@ class Admin(Actor):
 
 			#Locate the "Admin" tab.
 			wait = WebDriverWait(driver, 10)
-			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_btn")))
+			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_tab")))
 			admin.click()
 
 			#Navigate to "Batch create form"
@@ -102,13 +102,13 @@ class Admin(Actor):
 
 			#Fill in the form
 			wait3 = WebDriverWait(driver, 10)
-			batch_form = wait3.until(EC.presence_of_element_located((By.ID, "batch_frm")))
+			batch_form = wait3.until(EC.presence_of_element_located((By.ID, "batch_form")))
 			
 			text_area = batch_form.find_element(By.XPATH, "//textarea[@name='users']")
 			for i in range(len(lst)):
 				text_area.send_keys(lst[i]+" ")
 
-			submit_btn = batch_form.find_element(By.ID, "reg_btn")
+			submit_btn = batch_form.find_element(By.ID, "register_btn")
 			submit_btn.click()
 
 		except:
@@ -139,7 +139,7 @@ class Admin(Actor):
 
 			#Locate the "Admin" tab.
 			wait = WebDriverWait(driver, 10)
-			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_btn")))
+			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_tab")))
 			admin.click()
 
 			#Navigate to "Exisitin Accounts" table
@@ -151,10 +151,10 @@ class Admin(Actor):
 			if op == "block":
 				#Locate first account and block it on existing account table
 				wait3 = WebDriverWait(driver, 10)
-				button = driver.find_element(By.ID, "block_acc_1")
+				button = driver.find_element(By.ID, "block_account_1")
 			elif op == "activate":
 				wait3 = WebDriverWait(driver, 10)
-				button = driver.find_element(By.ID, "activate_acc_1")
+				button = driver.find_element(By.ID, "activate_account_1")
 			
 			driver.execute_script("arguments[0].click();", button)
 

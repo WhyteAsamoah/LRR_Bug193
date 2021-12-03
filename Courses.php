@@ -190,7 +190,7 @@ New Date/Time <br><input type="date" name="date" required=""> <input type="time"
 
                         <h3> Post new Lab Assignment </a></h3>
 
-                        <form method='post' enctype='multipart/form-data' action='Script.php' id="newlab_frm">
+                        <form method='post' enctype='multipart/form-data' action='Script.php' id="newlab_form">
                             <?php
                             $_SESSION['url'] = $url;
                             ?>
@@ -207,7 +207,7 @@ New Date/Time <br><input type="date" name="date" required=""> <input type="time"
                             Title
                             <input type='text' name='title' placeholder='Ttle' class='form-control' required='' value="" id="lab_title">
                             Instructions
-                            <textarea name='instructions' placeholder='Assignment Instructions' class='form-control' required='' value="" id="lab_inst"></textarea>
+                            <textarea name='instructions' placeholder='Assignment Instructions' class='form-control' required='' value="" id="lab_instructor"></textarea>
                             Marks
                             <input type='text' name='marks' placeholder='Marks' class='form-control' required='' value="" id="lab_mark">
                             Attachment 1
@@ -222,9 +222,9 @@ New Date/Time <br><input type="date" name="date" required=""> <input type="time"
                             Attachment 4
                             <input type='file' name='attachment4' placeholder='Attachment 4' class='form-control'>
                             <br>
-                            Submission Type <input type='radio' name='type' value='Individual' required='' id="lab_ind"> Individual
+                            Submission Type <input type='radio' name='type' value='Individual' required='' id="lab_individual"> Individual
 
-                            <input type='radio' name='type' value='Group' required='' id="lab_grp"> Group
+                            <input type='radio' name='type' value='Group' required='' id="lab_group"> Group
                             <hr>
                             <input type='submit' class='btn btn-primary' value='Post Lab Assignment' id="submit_btn"><br>
                         </form><br><br><br><br>
@@ -431,25 +431,25 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
                     <input type="hidden" name="frm_createCourse" value="true" required="" />
                     <input type="hidden" name="l" value="l" required="" />
                     Course Name
-                    <input type="text" name="name" placeholder="Course Name" class="form-control" required="" id="cname">
+                    <input type="text" name="name" placeholder="Course Name" class="form-control" required="" id="course_name">
 
                     Course Code
-                    <input type="text" name="code" placeholder="Course Code" class="form-control" required="" id="ccode">
+                    <input type="text" name="code" placeholder="Course Code" class="form-control" required="" id="course_code">
 
                     URL (Leave blank to use Course Code & Year)
                     <input type="text" name="url" placeholder="Choose Custom URL " class="form-control">
 
                     Academic Year
-                    <input type="text" name="academic" placeholder="Academic Year" class="form-control" required="" id="ayear">
+                    <input type="text" name="academic" placeholder="Academic Year" class="form-control" required="" id="academic_year">
 
                     Faculty <br>
-                    <input type="text" name="faculty" placeholder="Faculty" class="form-control" required="" id="fac">
+                    <input type="text" name="faculty" placeholder="Faculty" class="form-control" required="" id="faculty">
 
                     <input type="hidden" name="lecturer" value="<?php echo $_SESSION['user_id'];  ?>">
 
                     Verify Joining Students
-                    <input type="radio" name="verify" value="1" id="jyes"> Yes
-                    <input type="radio" name="verify" value="0" checked="" id="jno"> No
+                    <input type="radio" name="verify" value="1" id="join_yes"> Yes
+                    <input type="radio" name="verify" value="0" checked="" id="join_no"> No
 
                     <br>
                     <input type="submit" class="btn btn-primary" value="Create Portal" id="portal_btn"><br>

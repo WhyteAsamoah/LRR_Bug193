@@ -60,23 +60,23 @@ class Instructor(Actor):
 
 			#wait until the lab submission form shows up
 			wait2 = WebDriverWait(driver, 10)
-			new_lab_assignment_form = wait2.until(EC.presence_of_element_located((By.ID, "newlab_frm")))
+			new_lab_assignment_form = wait2.until(EC.presence_of_element_located((By.ID, "newlab_form")))
 			
 			#Fill the required form fields and submit.
 			lab_date = new_lab_assignment_form.find_element(By.ID, "date")
 			lab_date.send_keys(dateStr)
 			lab_title = new_lab_assignment_form.find_element(By.ID, "lab_title")
 			lab_title.send_keys("TESTASSIGNMENT"+str(dateStr))
-			lab_instructions = new_lab_assignment_form.find_element(By.ID, "lab_inst")
+			lab_instructions = new_lab_assignment_form.find_element(By.ID, "lab_instructor")
 			lab_instructions.send_keys("TESTINSTRUCTIONS"+str(dateStr))
 			lab_marks = new_lab_assignment_form.find_element(By.ID, "lab_mark")
 			lab_marks.send_keys("4")
 
 			#if group == 0 select individual submission, if group == 1 select group submission
 			if group == 0:		
-				submission_type = new_lab_assignment_form.find_element(By.ID, "lab_ind")
+				submission_type = new_lab_assignment_form.find_element(By.ID, "lab_individual")
 			elif group == 1:
-				submission_type = new_lab_assignment_form.find_element(By.ID, "lab_grp")
+				submission_type = new_lab_assignment_form.find_element(By.ID, "lab_group")
 			submission_type.click()
 			submit = new_lab_assignment_form.find_element(By.ID, "submit_btn")
 			submit.click()
@@ -114,25 +114,25 @@ class Instructor(Actor):
 			timeStr = self.utility.getTime()
 			
 			#Fill the required form fields and submit
-			course_name = driver.find_element(By.ID, "cname")
+			course_name = driver.find_element(By.ID, "course_name")
 			course_name.send_keys("TESTCOURSE"+str(dateStr)+str(timeStr))
 			
 			#This URL is needed to access the same created course via its link in post_lab_report() method.
 			global courseURL
 			courseURL = "TESTCOURSE"+str(dateStr)+str(timeStr)
-			course_code = driver.find_element(By.ID, "ccode")
+			course_code = driver.find_element(By.ID, "course_code")
 			course_code.send_keys("TC"+str(dateStr)+str(timeStr))
 			self.utility.storeCourseCode("TC"+str(dateStr)+str(timeStr))#Store course code to be used
-			academic_year = driver.find_element(By.ID, "ayear")				#later by student.
+			academic_year = driver.find_element(By.ID, "academic_year")				#later by student.
 			academic_year.send_keys("2021")
-			faculty = driver.find_element(By.ID, "fac")
+			faculty = driver.find_element(By.ID, "faculty")
 			faculty.send_keys("TESTING DEPARTMENT")
 
 			#If joining == 0 does not require join approval, if joining == 1 requires join approval
 			if joining == 0 :
-				joining_students = driver.find_element(By.ID, "jno")
+				joining_students = driver.find_element(By.ID, "join_no")
 			elif group == 1:
-				joining_students = driver.find_element(By.ID, "jyes")
+				joining_students = driver.find_element(By.ID, "join_yes")
 			joining_students.click()
 			submit = driver.find_element(By.ID, "portal_btn")
 			submit.click()
