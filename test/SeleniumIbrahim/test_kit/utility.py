@@ -44,6 +44,7 @@ class MyUtility:
 		"""
 		try:
 			driver = webdriver.Chrome()
+			driver.maximize_window()
 			driver.get(self.getPageURL())
 			return driver
 		except:
@@ -69,11 +70,11 @@ class MyUtility:
 		try:
 			driver = self.getSession()
 			WebDriverWait(driver, 10)
-			username = driver.find_element(By.ID, "uname")
+			username = driver.find_element(By.ID, "user_name")
 			username.send_keys(obj.getStudentID())
-			password = driver.find_element(By.ID, "upass")
+			password = driver.find_element(By.ID, "user_password")
 			password.send_keys(obj.getPassword())
-			login = driver.find_element(By.ID, "log_btn")
+			login = driver.find_element(By.ID, "login_btn")
 			login.click()
 			return driver
 		except:
@@ -104,26 +105,35 @@ class MyUtility:
 			driver = self.getSession()
 			wait = WebDriverWait(driver, 10, ignored_exceptions='StaleElementReferenceException')
 
-			#Locate the signup form and fill in the student ID
-			signup_form = wait.until(EC.presence_of_element_located((By.ID, "signup_frm")))
-			student_id = signup_form.find_element(By.ID, "std_id")
+			#Click the sign up button, and fill the sign up form
+			signup_btn = wait.until(EC.presence_of_element_located((By.ID, "signup_link")))
+			signup_btn.click()
+			
+			#Find and fill full student name
+			wait2 = WebDriverWait(driver, 10)
+			signup_form = wait2.until(EC.presence_of_element_located((By.ID, "signup_form")))
+			name_field = signup_form.find_element(By.ID, "full_name")
+			name_field.send_keys(name)
+
+			#Find and fill student ID
+			student_id = signup_form.find_element(By.ID, "student_id")
 			std_id = self.fetch_new_student_id()
 			student_id.send_keys(std_id)
-			next_btn = signup_form.find_element(By.ID, "next_btn")
-			next_btn.click()
-
-			#Fill in student data and sign up.
-			wait2 = WebDriverWait(driver, 10, ignored_exceptions='StaleElementReferenceException')
-			reg_form = wait2.until(EC.presence_of_element_located((By.ID, "frm")))
-			name_field = reg_form.find_element(By.XPATH, "//form/input[2]")
-			name_field.send_keys(name)
-			email_field = reg_form.find_element(By.XPATH, "//form/input[3]")
+			
+			#Find and fill email
+			email_field = signup_form.find_element(By.ID, "email")
 			email_field.send_keys(email)
-			password_field = reg_form.find_element(By.XPATH, "//form/input[4]")
+			
+			#Find and fill password
+			password_field = signup_form.find_element(By.ID, "password1")
 			password_field.send_keys(password)
-			re_password_field = reg_form.find_element(By.XPATH, "//form/input[5]")
+			
+			#Find and fill password confirmation
+			re_password_field = signup_form.find_element(By.ID, "password2")
 			re_password_field.send_keys(password)
-			submit = reg_form.find_element(By.XPATH, "//form/input[6]")
+			
+			#Sign up new student
+			submit = signup_form.find_element(By.ID, "signup_btn")
 			submit.click()
 			return 0
 
@@ -302,3 +312,12 @@ class MyUtility:
 			ls.append(chr(random.randint(97,122)))
 
 		return ''.join(ls)
+
+	def clean(self, file):
+		"""This method clean the test scripts directory by resetting some
+		.txt files.
+		"""
+
+		#Clean 'course_code.txt' file
+		f = open(file, "w+")
+		f.close()

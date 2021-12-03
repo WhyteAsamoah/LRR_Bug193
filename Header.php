@@ -64,7 +64,7 @@ if (mysqli_connect_errno()) {
 
         <?php
           if ($_SESSION['user_type'] == "Lecturer") {
-            echo  "&nbsp;&nbsp;&nbsp;  <i class=\"fa fa-cog\" style=\"color:#fff;\"> </i> &nbsp;<a style='color:#fff !important' href=\"~\..\Admin.php\">Admin </a>";
+            echo  "&nbsp;&nbsp;&nbsp;  <i class=\"fa fa-cog\" style=\"color:#fff;\"> </i> &nbsp;<a style='color:#fff !important' href=\"~\..\Admin.php\" id=\"admin_tab\">Admin </a>";
           }
         ?>
 
