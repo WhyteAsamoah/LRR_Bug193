@@ -175,8 +175,9 @@ class MyUtility:
 		- date: formatted date string.
 
 		"""
-		date = datetime.datetime.today().strftime ('%d%m%Y')
-		return date
+		date = datetime.datetime.today() + datetime.timedelta(days=1)
+		date_str = date.strftime ('%m%d%Y')
+		return date_str
 	
 	def getTomorrowDate(self):
 		
@@ -187,8 +188,8 @@ class MyUtility:
 		- date: formatted date string.
 
 		"""		
-		date = datetime.datetime.today() + datetime.timedelta(days=1)
-		date_str = date.strftime('%d%m%Y')
+		date = datetime.datetime.today() + datetime.timedelta(days=2)
+		date_str = date.strftime('%m%d%Y')
 		return date_str
 
 	def getYesterdayDate(self):
@@ -201,7 +202,7 @@ class MyUtility:
 
 		"""
 		date = datetime.datetime.today() - datetime.timedelta(days=1)
-		date_str = date.strftime('%d%m%Y')
+		date_str = date.strftime('%m%d%Y')
 		return date_str
 
 	def storeCourseCode(self, course_code):

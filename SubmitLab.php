@@ -88,7 +88,7 @@ include 'Header.php';
 
         <div class="col-md-6">
 
-            <form method='post' enctype='multipart/form-data' action='Script.php'>
+            <form method='post' enctype='multipart/form-data' action='Script.php' id="submit_lab_report_form">
                 <input type='hidden' name='frm_submitlab' value='true' required='' />
                 <input type='hidden' name='lab_id' value='<?php echo $id; ?>' required='' />
                 <input type='hidden' name='student_id' value='<?php echo $student_id; ?>' required='' />
@@ -96,10 +96,10 @@ include 'Header.php';
                 <input type='hidden' name='url' value='<?php echo $url; ?>' required='' />
 
                 Title
-                <input type='text' name='title' placeholder='Ttle' class='form-control' required=''>
+                <input type='text' name='title' placeholder='Ttle' class='form-control' required='' id="title">
 
                 Attachment 1
-                <input type='file' name='attachment1' placeholder='Attachment 1' class='form-control' required=''>
+                <input type='file' name='attachment1' placeholder='Attachment 1' class='form-control' required='' id="attachment1">
 
                 Attachment 2
                 <input type='file' name='attachment2' placeholder='Attachment 2' class='form-control'>
@@ -115,7 +115,7 @@ include 'Header.php';
             <input type='file' name='attachment4' placeholder='Attachment 4' class='form-control'>
             <br>
 
-            <input type='submit' class='btn btn-primary' value='Submit Lab Assignment'><br>
+            <input type='submit' class='btn btn-primary' value='Submit Lab Assignment' id="submit_lab_assignment_btn"><br>
             </form>
 
         </div>

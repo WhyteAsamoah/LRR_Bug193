@@ -30,9 +30,9 @@ if ($_SESSION['user_type'] == "Lecturer" || $_SESSION['user_type'] == "TA") {
                     $('<form id="frm" method="get" action="Script.php">\n\
     <input type="hidden" name="extenddeadline" value="true" >\n\
    <input type="hidden" name="id" value="' + id + '" > \n\
-New Date/Time <br><input type="date" name="date" required=""> <input type="time" name="time" required=""> \n\
+New Date/Time <br><input type="date" name="date" required="" id="new_date"> <input type="time" name="time" required=""> \n\
   \n\
-<br><input type="radio" value="1" name="type" required=""> Extend for All<hr>  \n\
+<br><input type="radio" value="1" name="type" required="" id="extend_for_all"> Extend for All<hr>  \n\
 <input type="radio" value="2" name="type" required=""> Extend for these Individual Students \n\
  ' + dropstudents + '   \n\
 </form>').dialog({
@@ -259,6 +259,7 @@ New Date/Time <br><input type="date" name="date" required=""> <input type="time"
             if (mysqli_num_rows($result) == 0) {
                 echo "No assignments posted so far.";
             } else {
+                $counter = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $marks = $row['Marks'];
                     $title = $row['Title'];
@@ -273,6 +274,7 @@ New Date/Time <br><input type="date" name="date" required=""> <input type="time"
                     $cours_id = $row['Course_ID'];
                     $as_type = $row['Type'];
                     $full_link = "<a href='~\..\Lab_Report_Assignments\\$att1'>$att1</a>";
+                    $counter += 1;
 
                     if ($att2 != "") {
                         $full_link = $full_link . " &nbsp|&nbsp <a href='~\..\Lab_Report_Assignments\\$att2'>$att2</a>";
@@ -307,7 +309,7 @@ New Date/Time <br><input type="date" name="date" required=""> <input type="time"
    <br> <span style='font-size:8pt'>Posted : $posted  Deadline :  <b> $deadline </b> &nbsp; ($marks Marks)      &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp;   "
                         . "<br>"
 
-                        . "<span class='btn-default'> &nbsp;&nbsp; $count_subs Submissions ( $count_marked Marked ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='Courses.php?course=" . $url . "&act=edit&cid=" . $id . "'>Edit</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href='~\..\Submissions.php?id=$id&header=$header&total=$marks' onclick=''> View </a>     &nbsp;&nbsp; |&nbsp;&nbsp;         <a href='#'  onclick='extend_deadline($id)'> Extend Deadline </a>  </span>         <hr> Attachments : $full_link </span>"
+                        . "<span class='btn-default'> &nbsp;&nbsp; $count_subs Submissions ( $count_marked Marked ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='Courses.php?course=" . $url . "&act=edit&cid=" . $id . "'>Edit</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href='~\..\Submissions.php?id=$id&header=$header&total=$marks' onclick='' id='view_submissions_link_$counter'> View </a>     &nbsp;&nbsp; |&nbsp;&nbsp;         <a href='#'  onclick='extend_deadline($id)' id='extend_deadline_link'> Extend Deadline </a>  </span>         <hr> Attachments : $full_link </span>"
                         . "&nbsp;&nbsp;</div>
                         ";
                 }
