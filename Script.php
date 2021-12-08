@@ -301,7 +301,7 @@ function is_valid_file_format($file)
         'cvc', 'c', 'class', 'cpp', 'h', 'java', 'sh', 'swift', 'zip', 'rar', 'ods', 'xlr', 'bak', 'ico', 'swf'
     );
 
-    utf8_encode($filename = $_FILES[$file]['name']);
+    $filename = utf8_encode($_FILES[$file]['name']);
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
     $result = in_array($ext, $allowed);
     return $result;
