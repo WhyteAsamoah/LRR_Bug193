@@ -34,39 +34,37 @@ function is_valid_student_number($student_id)
 }
 
 // ############################### SIGN UP ##################################
-if (!empty($_POST["frm_signup_1"])) {
+if (!empty($_POST["form_signup"])) {
 
-    $student_id = trim(mysqli_real_escape_string($con, $_POST["student_id"]));
+    $student_id = trim(mysqli_real_escape_string($con, $_POST["user_student_id"]));
 
     // validate student number
     if (!is_valid_student_number($student_id)) {
-        $_SESSION["info_signup1"] = "Invalid student number.";
-        header("Location: index.php");
+        $_SESSION["info_signup"] = "Invalid student number.";
+        header("Location: signup.php");
         return;
     }
 
     // Check if this student number is a legal one
     $result = mysqli_query($con, "SELECT * FROM `students_data` WHERE Student_ID='$student_id'");
     if (mysqli_num_rows($result) == 0) {
-        $_SESSION["info_signup1"] = "Your entered student number could not be verified.  Please contact Student Management Office <lanhui at zjnu.edu.cn>.  Thanks.";
-        header("Location: index.php");
+        $_SESSION["info_signup"] = "Your entered student number could not be verified.  Please contact Student Management Office <lanhui at zjnu.edu.cn>.  Thanks.";
+        header("Location: signup.php");
         return;
     }
 
-    $result98 = mysqli_query($con, "SELECT * FROM `users_table` WHERE Student_ID='$student_id'");
-    if (mysqli_num_rows($result98) == 0) {
-        $_SESSION['user_student_id'] = $student_id;
+    // Check if the student number isn't already registered
+
+    $student_result = mysqli_query($con, "SELECT * FROM `users_table` WHERE Student_ID='$student_id'");
+    if (mysqli_num_rows($student_result) > 0) {
+        $_SESSION["info_signup"] = "This Student ID is already in use! Please contact Student Management Office <lanhui at zjnu.edu.cn> for help.";
         header("Location: signup.php");
-        return;
-    } else {
-        $_SESSION["info_signup1"] = "This Student ID is already in use! Please contact Student Management Office <lanhui at zjnu.edu.cn> for help.";
-        header("Location: index.php");
         return;
     }
 }
 
 // ############################### CREATE STUDENT USER ##################################
-if (!empty($_POST["frm_signup_2"])) {
+if (!empty($_POST["form_signup"])) {
     $fullname = mysqli_real_escape_string($con, $_POST["fullname"]);
     $student_id = mysqli_real_escape_string($con, $_POST["user_student_id"]);
     $email = mysqli_real_escape_string($con, $_POST["email"]);
@@ -79,7 +77,7 @@ if (!empty($_POST["frm_signup_2"])) {
 
     // check confirmed password
     if (strcasecmp($password, $confirmpassword) != 0) {
-        $_SESSION['info_signup2'] = "Password confirmation failed.";
+        $_SESSION['info_signup'] = "Password confirmation failed.";
         $_SESSION['user_fullname'] = null;  // such that Header.php do not show the header information.        
         header("Location: signup.php");
         return;
@@ -87,7 +85,7 @@ if (!empty($_POST["frm_signup_2"])) {
 
     // validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['info_signup2'] = "Invalid email address.";
+        $_SESSION['info_signup'] = "Invalid email address.";
         header("Location: signup.php");
         return;
     }
@@ -100,7 +98,7 @@ if (!empty($_POST["frm_signup_2"])) {
 
     // check for strong password
     if (!$containsAll) {
-        $_SESSION['info_signup2'] = "Password must have at least characters that include lowercase letters, uppercase letters, numbers and sepcial characters (e.g., !?.,*^).";
+        $_SESSION['info_signup'] = "Password must have at least characters that include lowercase letters, uppercase letters, numbers and sepcial characters (e.g., !?.,*^).";
         header("Location: signup.php");
         return;
     }
@@ -109,7 +107,7 @@ if (!empty($_POST["frm_signup_2"])) {
     $result = mysqli_query($con, "SELECT * FROM users_table WHERE email='$email'");
     if(mysqli_num_rows($result) != 0)
     {
-        $_SESSION["info_signup2"]="Email address ".$email."  is already in use.";
+        $_SESSION["info_signup"]="Email address ".$email."  is already in use.";
         $_SESSION['user_fullname'] = null;
         header("Location: signup.php");
         return;

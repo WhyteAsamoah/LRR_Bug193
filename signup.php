@@ -18,7 +18,7 @@ include 'Header.php';
             <div class="panel-body">
 
                 <form method="post" action="Script.php" id="signup_form">
-                    <input type="hidden" name="frm_signup_2" value="true" />
+                    <input type="hidden" name="form_signup" value="true" />
                     Full Name
                     <input type="text" name="fullname" placeholder="Your full name" class="form-control" value="<?php echo $_SESSION['user_fullname']; ?>" required="required" id="full_name"/>
 
@@ -37,9 +37,9 @@ include 'Header.php';
                     <input type="submit" class="btn-primary" value="Sign up" id="signup_btn">
                     <?php
                     error_reporting(E_ALL);
-                    if (isset($_SESSION['info_signup2'])) {
-                        echo  '<hr><div class="alert alert-danger" role="alert">' . $_SESSION['info_signup2'] . '</div>';
-                        $_SESSION['info_signup2'] = null;
+                    if (isset($_SESSION['info_signup'])) {
+                        echo  '<hr><div class="alert alert-danger" role="alert">' . $_SESSION['info_signup'] . '</div>';
+                        $_SESSION['info_signup'] = null;
                     }
                     ?>
                 </form>
