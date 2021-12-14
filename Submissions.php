@@ -139,6 +139,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Pending' order by Sub
                     if (mysqli_num_rows($result1) == 0) {
                         echo "No Un-Marked Submissions for this Lab Report.";
                     } else {
+                        $mark_submission_btn_counter = 0;
                         while ($row = mysqli_fetch_assoc($result1)) {
                             $title = $row['Title'];
                             $Marks = $row['Marks'];
@@ -157,6 +158,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Pending' order by Sub
                             $groupname = $row['Group_Name'];
                             $groupleader = $row['Group_Leader'];
                             $student_id = $row['sub_std'];
+                            $mark_submission_btn_counter += 1;
 
                             if ($submitted_group == 0) {
                                 $submitted_by = $student_name . "(" . $student_id . ")";
@@ -184,7 +186,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Pending' order by Sub
 
                             echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
   $title  <br> by: <b> $submitted_by </b>
-   <br> <span style='font-size:8pt'>Submitted : $posted   <button class='btn-sm btn-info' style='margin-left:50px;' onclick='mark($Submission_ID,\"$title\",$total)'>  Mark Submission</button><br> Attachments : $full_link </span>  
+   <br> <span style='font-size:8pt'>Submitted : $posted   <button class='btn-sm btn-info' style='margin-left:50px;' onclick='mark($Submission_ID,\"$title\",$total)' id='mark_submission_btn_$mark_submission_btn_counter'>  Mark Submission</button><br> Attachments : $full_link </span>  
 </div></k>";
                         }
                     }
@@ -419,8 +421,8 @@ where course_group_members_table.Course_Group_id=$id");
         try {
 
             $('<form id="submit-form" method="get" action="Script.php">' + title + '(' + marks + ' marks) <input type="hidden" name="savemarks" value="true">\n\
- <input type="hidden" name="total" value="' + marks + '" > <input type="hidden" name="id" value="' + id + '" ><br> Marks <input type="text" name="marks">\n\
- Comments <textarea name="feedback"></textarea>  \n\
+ <input type="hidden" name="total" value="' + marks + '" > <input type="hidden" name="id" value="' + id + '" ><br> Marks <input type="text" name="marks" id="marks">\n\
+ Comments <textarea name="feedback" id="feedback"></textarea>  \n\
 <input type="hidden" name="labid" value="<?php echo $course_id; ?>"> <input type="hidden" name="header" value="<?php echo $header; ?>">  </form>').dialog({
                 modal: true,
                 title: 'Mark Submission',

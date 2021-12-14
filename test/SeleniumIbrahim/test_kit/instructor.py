@@ -164,12 +164,12 @@ class Instructor(Actor):
 
 			#Wait until the submission portal card appears
 			wait2 = WebDriverWait(driver, 10)
-			view = wait2.until(EC.presence_of_element_located((By.ID, "view_btn")))
+			view = wait2.until(EC.presence_of_element_located((By.ID, "view_submissions_link_1")))
 			view.click()
 
 			#Locate and click the 'Mark Submission' btn
 			wait3 = WebDriverWait(driver, 10)
-			mark_submission = wait3.until(EC.presence_of_element_located((By.ID, "mark_btn")))
+			mark_submission = wait3.until(EC.presence_of_element_located((By.ID, "mark_submission_btn_1")))
 			mark_submission.click()
 
 			#Fill and submit marking descision
@@ -210,7 +210,7 @@ class Instructor(Actor):
 
 			#Wait until lab report assignment list appears.
 			wait = WebDriverWait(driver, 10)
-			extend_deadline = wait.until(EC.presence_of_element_located((By.ID, "ext_btn")))
+			extend_deadline = wait.until(EC.presence_of_element_located((By.ID, "extend_deadline_link")))
 			extend_deadline.click()
 
 			#Wait until the extend deadline popup window shows up.
@@ -218,10 +218,10 @@ class Instructor(Actor):
 			extend_deadline_form = wait2.until(EC.presence_of_element_located((By.ID, "frm")))
 			
 			#Insert the new deadline and submit for all.
-			new_date = extend_deadline_form.find_element(By.XPATH, "//form[@id='frm']/input[3]")
+			new_date = extend_deadline_form.find_element(By.ID, "new_date")
 			dateStr = self.utility.getTomorrowDate()
 			new_date.send_keys(str(dateStr))
-			target = extend_deadline_form.find_element(By.XPATH, "//form[@id='frm']/input[5]")
+			target = extend_deadline_form.find_element(By.ID, "extend_for_all")
 			target.click()
 			submit = extend_deadline_form.find_element(By.XPATH, "/html/body/div[3]/div[2]/div/button[1]")
 			submit.click()

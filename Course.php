@@ -90,7 +90,7 @@ if ($_SESSION['user_type'] == "Student") {
                     <a class="nav-link" data-toggle="tab" href="#menu3">Submitted</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu4">Marked</a>
+                    <a class="nav-link" data-toggle="tab" href="#menu4" id="marked_tab">Marked</a>
                 </li>
 
                 <!----------Delete Course Button----------->
@@ -239,7 +239,7 @@ if ($_SESSION['user_type'] == "Student") {
                     }
                     echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
   $title ($type) <br> <span style='font-size:8pt'> $ins</span> 
-   <br> <span style='font-size:8pt'>Posted : $posted &nbsp;&nbsp;&nbsp;&nbsp; Deadline :   $deadline   &nbsp;&nbsp;&nbsp;&nbsp;($Marks Marks)  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<a href='~\..\SubmitLab.php?id=$labid&url=$url' class='btn-sm btn-info' style='margin-left:50px;'> Submit Lab Report</a><br> Attachments : $full_link </span>  
+   <br> <span style='font-size:8pt'>Posted : $posted &nbsp;&nbsp;&nbsp;&nbsp; Deadline :   $deadline   &nbsp;&nbsp;&nbsp;&nbsp;($Marks Marks)  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<a href='~\..\SubmitLab.php?id=$labid&url=$url' class='btn-sm btn-info' style='margin-left:50px;' id='submit_lab_report_btn'> Submit Lab Report</a><br> Attachments : $full_link </span>  
 </div></k>";
                 }
             }
@@ -457,7 +457,7 @@ where Lab_Report_ID=$lab_repo_id and (lab_report_submissions.Student_id='$studen
                     $remarking_reason = $row['Remarking_Reason'];
                     if ($status == 'Marked') {
                         $rm_data = "\Script.php?remarking=yes&id=$Submission_ID&url=$url&status=Remarking";
-                        $remarking = "<button  onclick='remarking(\"$rm_data\")' class='btn-sm btn-success'>  Request Remarking </button>";
+                        $remarking = "<button  onclick='remarking(\"$rm_data\")' class='btn-sm btn-success' id='request_remarking_btn'>  Request Remarking </button>";
                     }
                     if ($status == 'Remarking') {
                         $remarking = "<span  style='color:orange'><i class='fa fa-info-circle'></i> Remarking Request sent </span> <br> Remarking Reason:<i>$remarking_reason </i> <br>";
@@ -520,7 +520,7 @@ where Lab_Report_ID=$lab_repo_id and (lab_report_submissions.Student_id='$studen
             $count_groups = $row['Course_Group_id'];
         }
 
-        echo " <button onclick='CreateGroup()' class='btn btn-primary'> Create Group</button>";
+        echo " <button onclick='CreateGroup()' class='btn btn-primary' id='create_group_btn'> Create Group</button>";
 
         ?>
 
@@ -584,7 +584,7 @@ include 'Footer.php';
         try {
 
             $('<form id="frm" method="get" action="Script.php"><input type="hidden" name="creategroup" value="true">\n\
- <input type="hidden" name="student_id" value="<?php echo $student_id; ?>" > Group Name  <input type="text" name="name">\n\
+ <input type="hidden" name="student_id" value="<?php echo $student_id; ?>" > Group Name  <input type="text" name="name" id="group_name">\n\
 <input type="hidden" name="url" value="<?php echo $url; ?>">  <input type="hidden" name="id" value="<?php echo $course_id; ?>">    </form>').dialog({
                 modal: true,
                 title: 'Create Group',

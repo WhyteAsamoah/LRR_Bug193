@@ -89,19 +89,19 @@ class Student(Actor):
 
 			#Locate and click assignment submission button.
 			wait2 = WebDriverWait(driver, 10)
-			assignment_card = wait2.until(EC.element_to_be_clickable((By.LINK_TEXT, "Submit Lab Report")))
+			assignment_card = wait2.until(EC.element_to_be_clickable((By.ID, "submit_lab_report_btn")))
 			assignment_card.click()
 
 			#Locate the assignment submission form and fill in the required data.
 			wait3 = WebDriverWait(driver, 10)
-			assignment_form = wait3.until(EC.presence_of_element_located((By.ID, "sub_form")))
+			assignment_form = wait3.until(EC.presence_of_element_located((By.ID, "submit_lab_report_form")))
 			title = assignment_form.find_element(By.ID, "title")
 			dateStr = self.utility.getTodayDate()
 			timeStr = self.utility.getTime()
 			title.send_keys("TESTSUBMISSIOM"+dateStr+timeStr)
-			attachment = assignment_form.find_element(By.ID, "att_one")
+			attachment = assignment_form.find_element(By.ID, "attachment1")
 			attachment.send_keys(os.getcwd()+"/DUMMY_SUBMISSION.txt")
-			submit = driver.find_element(By.ID, "submit_btn")
+			submit = driver.find_element(By.ID, "submit_lab_assignment_btn")
 			submit.click()
 			return 0
 
@@ -135,7 +135,7 @@ class Student(Actor):
 			wait2 = WebDriverWait(driver, 10)
 			marked_tab = wait2.until(EC.presence_of_element_located((By.ID, "marked_tab")))
 			marked_tab.click()
-			req_remark = driver.find_element(By.ID, "req_remark")
+			req_remark = driver.find_element(By.ID, "request_remarking_btn")
 			req_remark.click()
 
 			#Fill in the remarking form and submit.
@@ -172,7 +172,7 @@ class Student(Actor):
 
 			#Locate the create course group button and click it.
 			wait2 = WebDriverWait(driver, 10)
-			create_group = wait2.until(EC.presence_of_element_located((By.ID, "g_create_btn")))
+			create_group = wait2.until(EC.presence_of_element_located((By.ID, "create_group_btn")))
 			create_group.click()
 
 			#Fill in the course group form and create.
@@ -180,9 +180,9 @@ class Student(Actor):
 			group_form = wait3.until(EC.presence_of_element_located((By.ID, "frm")))
 			timeStr = self.utility.getTime()
 			dateStr = self.utility.getTodayDate()
-			group_name = group_form.find_element(By.ID, "g_name")
+			group_name = group_form.find_element(By.ID, "group_name")
 			group_name.send_keys("TESTGROUP"+str(dateStr)+str(timeStr))
-			create = group_form.find_element(By.XPATH, "//div[2]/div/button[1]")
+			create = driver.find_element(By.XPATH, "/html/body/div[7]/div[2]/div/button[1]")
 			create.click()
 			return 0
 

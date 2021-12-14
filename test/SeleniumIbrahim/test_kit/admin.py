@@ -188,18 +188,18 @@ class Admin(Actor):
 
 			#Locate the "Admin" tab.
 			wait = WebDriverWait(driver, 10)
-			admin = wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/nav/div/form/a[1]")))
+			admin = wait.until(EC.presence_of_element_located((By.ID, "admin_tab")))
 			admin.click()
 
 			#Navigate to "Existing Courses" table.
 			wait2 = WebDriverWait(driver, 10)
-			courses_table = wait2.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div[2]/div/ul/li[2]/a")))
+			courses_table = wait2.until(EC.presence_of_element_located((By.ID, "existing_courses")))
 			courses_table.click()
 
 			#Assign TA to the first course in "Existing Courses" table
 			wait3 = WebDriverWait(driver, 10)
-			drop_menu_form = wait3.until(EC.presence_of_element_located((By.XPATH, "//*[@id='menub']/table/tbody/tr[2]/td[5]/form")))
-			assign_btn = drop_menu_form.find_element(By.XPATH, "//input[@type='submit'][@value='assign']")
+			drop_menu_form = wait3.until(EC.presence_of_element_located((By.ID, "drop_menu_form_1")))
+			assign_btn = drop_menu_form.find_element(By.ID, "assign_btn_1")
 			assign_btn.click()
 
 			return 0

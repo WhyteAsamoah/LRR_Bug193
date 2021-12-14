@@ -157,7 +157,7 @@ if ($_SESSION['user_type'] != "Lecturer") {
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#menub">Existing Courses</a>
+          <a class="nav-link active" data-toggle="tab" href="#menub" id="existing_courses">Existing Courses</a>
         </li>
 
       </ul>
@@ -182,6 +182,7 @@ if ($_SESSION['user_type'] != "Lecturer") {
             $result = mysqli_query($con, "SELECT `Course_ID`, `Course_Name`, `Academic_Year`, `Faculty`, `Lecturer_User_ID`, `TA_User_ID`, `Course_Code`, `URL`, `Verify_New_Members`   , users_table.Full_Name  FROM `courses_table` INNER JOIN users_table ON users_table.User_ID=courses_table.Lecturer_User_ID");
             if (mysqli_num_rows($result) == 0) {
             } else {
+              $counter = 0;
               while ($row = mysqli_fetch_assoc($result)) {
                 $name = $row['Course_Name'];
                 $code = $row['Course_Code'];
@@ -189,6 +190,7 @@ if ($_SESSION['user_type'] != "Lecturer") {
                 $lecturer = $row['Full_Name'];
                 $academic = $row['Academic_Year'];
                 $c_id = $row['Course_ID'];
+                $counter += 1;
 
                 $resultTA = mysqli_query($con, "SELECT `Course_ID`, `TA`,users_table.Full_Name as TA_NAME FROM `course_ta`
 INNER JOIN users_table on users_table.User_ID=course_ta.TA
@@ -200,7 +202,7 @@ where course_ta.Course_ID=$c_id");
                 }
 
                 echo "  
-                          <tr> <td>$code - $name</td>  <td>$faculty </td> <td>$lecturer</td><td>$ta</td>  <td><form method='get' action='Script.php'> <select name='ta' class=''>";
+                          <tr> <td>$code - $name</td>  <td>$faculty </td> <td>$lecturer</td><td>$ta</td>  <td><form method='get' action='Script.php' id='drop_menu_form_$counter'> <select name='ta' class=''>";
 
                 $resultx = mysqli_query($con, "SELECT * FROM Users_Table WHERE UserType='TA'");
                 if (mysqli_num_rows($resultx) == 0) {
@@ -212,7 +214,7 @@ where course_ta.Course_ID=$c_id");
                   }
                 }
 
-                echo "</select>  <input type='hidden' name='assignTA' value='true'> <input type='hidden' name='id' value='$c_id'>  <input type='submit' value='assign'></form> </td></tr>
+                echo "</select>  <input type='hidden' name='assignTA' value='true'> <input type='hidden' name='id' value='$c_id'>  <input type='submit' value='assign' id='assign_btn_$counter'></form> </td></tr>
                          ";
               }
             } ?>
