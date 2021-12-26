@@ -197,3 +197,39 @@ class Student(Actor):
 
 	def join_course_group(self):
 		pass
+
+	def search_course_after_signup(self, name, email, password):
+
+		""" This method automates student searching for a course after signing up.
+
+		Returns:
+		- 0: on success
+		- 1 on failure to complete case execution.
+
+		"""
+		try:
+			#Signup first.
+			driver = self.utility.signup(name, email, password)
+
+
+			#Search for course by its code.
+			wait = WebDriverWait(driver, 10)
+			course_code_field = wait.until(EC.presence_of_element_located((By.ID, "search_field")))
+			course_code = self.utility.getCourseCode()
+			course_code_field.send_keys(course_code)
+			find_btn = driver.find_element(By.ID, "find_btn")
+			find_btn.click()
+
+			#Wait until the course is found (i.e The join button will appear when the course is found)
+			join_btn = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "join_btn")))
+			return 0
+
+		#Else, if an exception occurs, log the error and abort.
+		except:
+			print("There was a problem executing this test case")
+			print("Error in \"search_course_after_signup()\" method, see error_log.txt for more details")
+			err_msg = traceback.format_exc()
+			self.utility.log_error(err_msg)
+			print("Treminating session")
+			self.utility.killSession(driver)
+			return 1

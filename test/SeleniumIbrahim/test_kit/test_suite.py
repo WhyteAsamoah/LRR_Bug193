@@ -35,7 +35,7 @@ from instructor import Instructor
 from student import Student
 from admin import Admin
 
-utility = MyUtility("http://127.0.0.1/edsa-LRR3/")
+utility = MyUtility("http://127.0.0.1/LRR/")
 instructor = Instructor("aA124536!","202032070221", utility)
 student = Student("aA124536!", "202032070222", utility)
 admin = Admin("aA124536!","202032070221", utility)
@@ -96,3 +96,6 @@ def test_case_15():
 
 def test_case_16():
 	admin.assign_TA() == cond
+
+def test_case_17():
+	student.search_course_after_signup(f_name+' '+l_name, l_name+'@testing.com', 'aA124536!') == cond

@@ -96,7 +96,7 @@ class MyUtility:
 		- password: student password string.
 
 		Returns:
-		0 on success
+		driver: selenium.webdriver object.
 		1 on failure to complete case execution.		
 		
 		"""
@@ -135,7 +135,7 @@ class MyUtility:
 			#Sign up new student
 			submit = signup_form.find_element(By.ID, "signup_btn")
 			submit.click()
-			return 0
+			return driver
 
 		except:
 			print("There was a problem executing this test case")
