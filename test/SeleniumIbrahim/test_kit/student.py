@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from actor import Actor
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -197,3 +198,54 @@ class Student(Actor):
 
 	def join_course_group(self):
 		pass
+	def change_student_id(self, student_id):
+		""" This method automates a student updating his student ID.
+
+		Parameters:
+		- student_id: string, the new student ID to be replaced with the old one.
+
+		Return:
+		- 0 on success.
+		- 1 on failure to complete case execution.
+
+		"""
+
+		try:
+			#Login in order to create course group.
+			driver = self.utility.login(self)
+
+			#Locating the "Update" dropdown menu
+			wait = WebDriverWait(driver, 10)
+			update_drop_down_menu = wait.until(EC.presence_of_element_located((By.ID, "update_dropdown")))
+			update_drop_down_menu.click()
+
+			wait2 = WebDriverWait(driver, 10)
+
+			#Locate and click on "update status"
+			update_status = wait2.until(EC.presence_of_element_located((By.ID, "update_status")))
+			update_status.click()
+
+			#Locate, fill student ID, and submit
+			wait3 = WebDriverWait(driver, 10)
+			update_status_form = wait3.until(EC.presence_of_element_located((By.ID, "update_status_form")))
+			student_id_field = update_status_form.find_element(By.ID, "student_id")
+			student_id_field.clear()
+			student_id_field.send_keys(student_id)
+			update_btn = update_status_form.find_element(By.ID, "update_btn")
+			update_btn.click()
+
+			wait4 = WebDriverWait(driver, 10)
+			search_field = driver.find_elements(By.ID, "search_field")
+			if len(search_field) != 0:
+				return 0
+			else:
+				raise NoSuchElementException
+
+		except:
+			print("There was a problem executing this test case")
+			print("Error in \"change_student_id()\" method, see error_log.txt for more details")
+			err_msg = traceback.format_exc()
+			self.utility.log_error(err_msg)
+			print("Treminating session")
+			self.utility.killSession(driver)
+			return 1

@@ -96,3 +96,5 @@ def test_case_15():
 
 def test_case_16():
 	admin.assign_TA() == cond
+def test_case_17():
+    student.change_student_id("202032070223") == cond
