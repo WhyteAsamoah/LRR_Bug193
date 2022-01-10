@@ -103,16 +103,6 @@ if (!empty($_POST["form_signup"])) {
         return;
     }
 
-    // check if email is taken
-    $result = mysqli_query($con, "SELECT * FROM users_table WHERE email='$email'");
-    if(mysqli_num_rows($result) != 0)
-    {
-        $_SESSION["info_signup"]="Email address ".$email."  is already in use.";
-        $_SESSION['user_fullname'] = null;
-        header("Location: signup.php");
-        return;
-    }
-
     // apply password_hash()
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO `users_table`(`Email`, `Password`, `Full_Name`, `UserType`, `Student_ID`) VALUES "
